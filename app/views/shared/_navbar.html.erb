@@ -1,0 +1,17 @@
+<header>
+  <%= link_to root_path do %>
+    <h1 class="logo">
+      liFEsTlye &nbsp<i class="fas fa-circle fa-sm"></i>
+    </h1>
+  <% end %>
+  <nav>
+    <ul>
+      <% categories.each do |categorie| %>
+        <li><%= link_to categorie.name, category_path(categorie) %></li>
+      <% end %>
+    </ul>
+  </nav>
+  <div class="access">
+    <%= link_to 'LOGIN', root_path %> | <%= link_to  "REGISTER", root_path %> <i class="fas fa-search"></i>
+  </div>
+</header>

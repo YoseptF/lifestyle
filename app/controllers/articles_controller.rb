@@ -3,6 +3,11 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  def index
+    @featured = Article.featured
+    @categories = Category.by_priority
+  end
+
   def create
     @article = current_user.articles.build(article_params)
 

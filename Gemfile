@@ -5,6 +5,7 @@ ruby '2.7.0'
 
 gem 'faker'
 gem 'hirb'
+gem 'lograge'
 gem 'rest-client'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'

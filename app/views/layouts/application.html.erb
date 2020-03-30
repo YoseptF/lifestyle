@@ -4,12 +4,15 @@
     <title>Lifestyle</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/042baba16c.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Lato:900&display=swap' %>
   </head>
-
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= render  "shared/navbar" %>
+      <%= yield %>
+    </div>
   </body>
 </html>

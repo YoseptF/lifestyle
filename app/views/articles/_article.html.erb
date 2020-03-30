@@ -1,0 +1,17 @@
+<div class="article-wrapper">
+  <div class="info">
+    <h1><%= category %></h1>
+    <br>
+    <h2><%= article.title %></h2>
+    <p><%= deck_for article %></p>
+    <h3>Author: <%= article.author.name %></h3>
+    <div class="votes">
+      <%= link_to '#' do%><i class="fas fa-arrow-up"></i><% end %>
+      <i class="fas fa-circle"><span><%= article.votes.count %></span></i>
+      <%= link_to '#' do%><i class="fas fa-arrow-down"></i><% end %>
+    </div>
+  </div>
+  <div class="image-wrapper">
+    <%= image_tag url_for(article.image) %>
+  </div>
+</div>
