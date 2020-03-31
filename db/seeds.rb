@@ -13,7 +13,9 @@ User.create(
   name: 'Joseph'
 )
 
-xml_res = RestClient.get "http://www.gamespot.com/api/articles/?api_key=#{ENV['GAMESPOT_API']}&sort=publish_date:desc&limit=120&feld_list=authors,title,body,image,categories"
+GAMESPOT_API = ENV['GAMESPOT_API'] || process.env.GAMESPOT_API
+
+xml_res = RestClient.get "http://www.gamespot.com/api/articles/?api_key=#{GAMESPOT_API}&sort=publish_date:desc&limit=120&feld_list=authors,title,body,image,categories"
 data_hash = Hash.from_xml(xml_res.body)
 
 articles = data_hash["response"]["results"]["article"]
