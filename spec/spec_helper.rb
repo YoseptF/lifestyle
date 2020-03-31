@@ -94,3 +94,45 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def title_validations
+  it 'long enough' do
+    article1.title = '1'
+    article1.save
+    expect(article1.errors.full_messages).to include('Title is too short (minimum is 3 characters)')
+  end
+  it 'not too long' do
+    article1.title = '1' * 100_000
+    article1.save
+    expect(article1.errors.full_messages).to include('Title is too long (maximum is 150 characters)')
+  end
+  it 'that exists' do
+    article1.save
+    expect(article1.errors.full_messages).to include("Title can't be blank")
+  end
+end
+
+def text_validations
+  it 'long enough' do
+    article1.text = '1'
+    article1.save
+    expect(article1.errors.full_messages).to include('Text is too short (minimum is 15 characters)')
+  end
+  it 'not too long' do
+    article1.text = '1' * 200_000
+    article1.save
+    expect(article1.errors.full_messages).to include('Text is too long (maximum is 25000 characters)')
+  end
+  it 'that exists' do
+    article1.save
+    expect(article1.errors.full_messages).to include("Text can't be blank")
+  end
+end
+
+def valid_article
+  user1.save
+  article1.title = 'The title'
+  article1.text = '*' * 10_000
+  article1.author_id = User.first.id
+  article1.image.attach(io: open('https://source.unsplash.com/random'), filename: 'file.jpg')
+end
