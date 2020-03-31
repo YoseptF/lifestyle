@@ -6,8 +6,9 @@
     <%= f.text_field :title %>
     <%= f.label :text %>
     <%= f.text_area :text %>
-    <%= f.label :image %>
+    <%= label_tag :categories %>
     <%= select_tag :categories, options_for_select(@categories) %>
+    <%= f.label :image %>
     <%= f.file_field :image %>
     <%= f.submit 'Publish article' %>
   <% end %>

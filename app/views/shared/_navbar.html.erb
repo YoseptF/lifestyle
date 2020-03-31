@@ -13,7 +13,8 @@
   </nav>
   <div class="access">
     <% if logged_in? %>
-      <span>Hello!, <%= current_user.name %></span> |
+      <span>Hello!, <%= current_user.name %></span>
+      <%= link_to  "PUBLISH", new_article_path %> |
       <%= link_to  "LOG OUT", session_path(current_user), method: :delete %>
     <% else %>
       <%= link_to 'LOGIN', new_session_path %> | <%= link_to  "REGISTER", new_user_path %> <i class="fas fa-search"></i>

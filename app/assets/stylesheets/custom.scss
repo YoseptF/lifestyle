@@ -270,6 +270,7 @@ header {
     padding: 24px;
     display: flex;
     flex-direction: column;
+    .field_with_errors,
     label {
       color: white;
       font-weight: 900;
