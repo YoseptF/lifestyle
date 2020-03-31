@@ -13,6 +13,6 @@ class Article < ApplicationRecord
                      joins(:votes)
                        .select('articles.*')
                        .order('COUNT(votes.article_id) DESC')
-                       .group('articles.title').limit(1).take
+                       .group('articles.title, articles.id').limit(1).take
                    }
 end
