@@ -23,6 +23,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def show
+    @article = Article.includes(:image_attachment, :author).find_by(id: params[:id])
+  end
+
   def article_params
     params.require(:article).permit(
       :author_id,

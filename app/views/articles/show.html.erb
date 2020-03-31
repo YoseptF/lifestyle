@@ -1,0 +1,15 @@
+<div class="article-show">
+  <%= image_tag url_for(@article.image) %>
+  <div class="content">
+    <div class="info">
+      <span>Author: <%= @article.author.name %></span>
+      <div class="votes">
+        <% if logged_in? %>
+          <%= upvote(@article) %>
+        <% end %>
+        <i class="fas fa-circle"><span><%= @article.votes.count %></span></i>
+      </div>
+    </div>
+    <%== @article.text %>
+  </div>
+</div>
