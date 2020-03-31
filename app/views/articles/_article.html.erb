@@ -6,9 +6,10 @@
     <p><%= deck_for article %></p>
     <h3>Author: <%= article.author.name %></h3>
     <div class="votes">
-      <%= link_to '#' do%><i class="fas fa-arrow-up"></i><% end %>
+      <% if logged_in? %>
+        <%= upvote(article) %>
+      <% end %>
       <i class="fas fa-circle"><span><%= article.votes.count %></span></i>
-      <%= link_to '#' do%><i class="fas fa-arrow-down"></i><% end %>
     </div>
   </div>
   <div class="image-wrapper">

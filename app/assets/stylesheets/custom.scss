@@ -14,10 +14,31 @@ $grey-text: #847f7a;
   font-family: "Lato", sans-serif;
 }
 
+html {
+  background: #4e443e;
+}
+
 a {
   text-decoration: none;
   font-family: sans-serif;
   font-weight: 600;
+}
+
+.flash {
+  position: absolute;
+  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid $orange;
+  color: $orange;
+  background-color: #3b36338c;
+  @include center-absolute(50%, 12%);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 100%;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
 }
 
 .container {
@@ -44,7 +65,7 @@ a {
     z-index: 120;
     width: 95%;
     max-width: 1115px;
-    @include center-absolute(50%, 92%)
+    @include center-absolute(50%, 92%);
   }
   h2 {
     color: white;
@@ -59,7 +80,7 @@ a {
   img {
     position: absolute;
     width: 130%;
-    @include center-absolute
+    @include center-absolute;
   }
   .shadow {
     background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 50%);
@@ -76,7 +97,7 @@ a {
   overflow: hidden;
   position: relative;
   a:hover .shadow {
-    background: linear-gradient(0deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 53%, rgba(0,0,0,0.88) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0) 53%, rgba(0, 0, 0, 0.88) 100%);
   }
   a {
   }
@@ -89,14 +110,14 @@ a {
   }
   h1 {
     border-bottom: 4px solid yellow;
-    @include center-absolute(12%, 3%)
+    @include center-absolute(12%, 3%);
   }
   h2 {
     bottom: 5px;
     left: 12px;
   }
   .shadow {
-    background: linear-gradient(0deg, rgba(0,0,0,0.77) 0%, rgba(0,0,0,0) 53%, rgba(0,0,0,0.77) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.77) 0%, rgba(0, 0, 0, 0) 53%, rgba(0, 0, 0, 0.77) 100%);
     position: absolute;
     height: 100%;
     width: 100%;
@@ -105,11 +126,12 @@ a {
   img {
     position: absolute;
     width: 130%;
-    @include center-absolute
+    @include center-absolute;
   }
 }
 
 header {
+  background: white;
   grid-column: span 12;
   height: 10vh;
   display: flex;
@@ -141,25 +163,27 @@ header {
     }
   }
   a,
-  i {
+  i,
+  h1 {
     color: $grey-text;
   }
 }
 
 .article-wrapper {
   @for $i from 0 through 20 {
-    &:nth-child(n+#{5+($i*6)}):nth-child(-n+#{7+($i*6)}) {
+    &:nth-child(n + #{4+($i*6)}):nth-child(-n + #{6+($i*6)}) {
       flex-direction: row-reverse;
     }
   }
   display: flex;
   grid-column: span 4;
   height: 30vh;
+  background: white;
   min-height: 210px;
   .info {
     position: relative;
     width: 100%;
-    h1{
+    h1 {
       margin: 12px 0 0 12px;
       color: $orange;
       font-weight: 900;
@@ -168,7 +192,7 @@ header {
       display: inline-block;
       margin-bottom: 12px;
     }
-    h2{
+    h2 {
       margin: 0 0 0 12px;
       color: $grey-text;
       font-weight: 700;
@@ -177,19 +201,19 @@ header {
     p {
       margin: 10px;
     }
-    h3{
+    h3 {
       margin: 10px;
       height: 18.7px;
       overflow: hidden;
     }
-    .votes{
+    .votes {
       position: absolute;
       right: 11px;
       display: flex;
       align-items: center;
       a {
         color: $grey-text;
-        &:hover{
+        &:hover {
           color: $orange;
         }
       }
@@ -201,7 +225,7 @@ header {
           position: absolute;
           font-size: 1rem;
           color: white;
-          @include center-absolute
+          @include center-absolute;
         }
       }
     }
@@ -211,7 +235,72 @@ header {
     overflow: hidden;
     position: relative;
     img {
-      @include center-absolute(40%,15%)
+      @include center-absolute(40%, 15%);
     }
+  }
+}
+
+.login,
+.article {
+  grid-column: 5/9;
+  form {
+    margin-top: 50px;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    label {
+      color: white;
+      font-weight: 900;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    textarea{
+      height: 200px;
+      border-radius: 4px;
+    }
+    input {
+      height: 48px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      border: 2px solid $grey-text;
+    }
+    input[type="text"] {
+      padding-left: 12px;
+    }
+    input[type="submit"] {
+      cursor: pointer;
+      color: $grey-text;
+      font-weight: 700;
+      &:hover {
+        color: white;
+        background: $grey-text;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+footer {
+  padding: 24px;
+  grid-column: span 12;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span:nth-child(1) {
+    color: $orange;
+  }
+  span:nth-child(2) {
+    color: white;
+  }
+  a {
+    color: white;
+    font-weight: 900;
+  }
+  i {
+    color: $orange;
+  }
+  .social > span {
+    color: white;
   }
 }

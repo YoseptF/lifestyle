@@ -12,6 +12,11 @@
     </ul>
   </nav>
   <div class="access">
-    <%= link_to 'LOGIN', root_path %> | <%= link_to  "REGISTER", root_path %> <i class="fas fa-search"></i>
+    <% if logged_in? %>
+      <span>Hello!, <%= current_user.name %></span> |
+      <%= link_to  "LOG OUT", session_path(current_user), method: :delete %>
+    <% else %>
+      <%= link_to 'LOGIN', new_session_path %> | <%= link_to  "REGISTER", root_path %> <i class="fas fa-search"></i>
+    <% end %>
   </div>
 </header>

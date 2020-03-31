@@ -1,10 +1,10 @@
 module SessionsHelper
   def log_in(user)
-    session[:id] = user
+    session[:id] = user.id
   end
 
-  def currrent_user
-    @currrent_user ||= User.find_by(id: session[:id])
+  def current_user
+    @current_user ||= User.find_by(id: session[:id])
   end
 
   def current_user?(user)

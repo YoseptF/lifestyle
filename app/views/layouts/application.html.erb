@@ -4,15 +4,22 @@
     <title>Lifestyle</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/042baba16c.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Lato:900&display=swap' %>
   </head>
   <body>
-    <div class="container">
+    <% flash.each do |type, msg| %>
+      <h1 class="flash <%= type %>"><%= msg %></h1>
+    <% end %>
+    <div class="main">
       <%= render  "shared/navbar" %>
-      <%= yield %>
+      <div class="container">
+        <%= yield %>
+      </div>
+      <%= render  "shared/footer" %>
     </div>
   </body>
 </html>
