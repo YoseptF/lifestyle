@@ -17,8 +17,9 @@ class ArticlesController < ApplicationController
       p 'done'
       redirect_to article_path(@article)
     else
+      p @article.errors.full_messages
       p 'not done'
-      render :new
+      render 'new'
     end
   end
 

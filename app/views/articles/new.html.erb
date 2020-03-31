@@ -1,18 +1,7 @@
-<% if @article.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      The form contains <%= pluralize(@article.errors.count, "error") %>.
-    </div>
-    <ul>
-      <% @article.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<p><%= @article.errors.full_messages %></p>
+
 <div class="article">
-  <%= form_with model: @article do |f| %>
+<%= render  "shared/show_errors", model: @article %>
+  <%= form_with model: @article, local: true do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>
     <%= f.label :text %>

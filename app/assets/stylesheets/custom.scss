@@ -26,6 +26,7 @@ a {
 
 .flash {
   position: absolute;
+  z-index: 100;
   border-radius: 4px;
   padding: 12px;
   border: 1px solid $orange;
@@ -241,10 +242,30 @@ header {
 }
 
 .login,
-.article {
+.article,
+.user {
   grid-column: 5/9;
+  .errors-wrapper {
+    text-align: center;
+    margin-top: 16px;
+    ul {
+      list-style: none;
+      font-weight: 700;
+      color: $orange;
+    }
+  }
   form {
-    margin-top: 50px;
+    .field_with_errors {
+      width: 100%;
+
+      input,
+      textarea {
+        width: 100%;
+        border: 3px solid red;
+        border-radius: 4px;
+      }
+    }
+    margin-top: 34px;
     width: 100%;
     padding: 24px;
     display: flex;
@@ -255,9 +276,10 @@ header {
       margin-bottom: 12px;
       text-align: center;
     }
-    textarea{
+    textarea {
       height: 200px;
       border-radius: 4px;
+      padding: 12px;
     }
     input {
       height: 48px;
