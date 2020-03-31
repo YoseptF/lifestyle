@@ -20,6 +20,7 @@ class VotesController < ApplicationController
       redirect_back_or root_path
     else
       flash[:danger] = 'something went wrong'
+      redirect_back_or root_path
     end
   end
 end

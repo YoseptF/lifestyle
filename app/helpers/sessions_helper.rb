@@ -28,4 +28,13 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  def render_category
+    render category_path(Category.find(session[:forwarding_category]))
+    session.delete(:forwarding_category)
+  end
+
+  def store_category(category)
+    session[:forwarding_category] = category.id
+  end
 end

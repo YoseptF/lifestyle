@@ -1,13 +1,13 @@
 <div class="article-wrapper">
   <div class="info">
-    <h1><%= category %></h1>
+    <h1><%= category.name %></h1>
     <br>
     <h2><%= article.title %></h2>
     <p><%= deck_for article %></p>
     <h3>Author: <%= article.author.name %></h3>
     <div class="votes">
       <% if logged_in? %>
-        <%= upvote(article) %>
+        <%= upvote(article, category) %>
       <% end %>
       <i class="fas fa-circle"><span><%= article.votes.count %></span></i>
     </div>

@@ -11,8 +11,9 @@ module ArticlesHelper
     url_for(category.articles.take.image)
   end
 
-  def upvote(article)
+  def upvote(article, category)
     store_location
+    store_category(category)
     @vote = Vote.find_by(user_id: current_user.id, article_id: article.id)
 
     if @vote

@@ -13,7 +13,7 @@
   </head>
   <body>
     <% flash.each do |type, msg| %>
-      <h1 class="flash <%= type %>"><%= msg %></h1>
+      <h1 class="animated fadeOut flash delay-1s <%= type %>"><%= msg %></h1>
     <% end %>
     <div class="main">
       <%= render  "shared/navbar" %>

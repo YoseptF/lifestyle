@@ -18,6 +18,10 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def reload
+    # render action_name
+  end
+
   private
 
   def session_params
