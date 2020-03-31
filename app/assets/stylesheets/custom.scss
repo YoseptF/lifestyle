@@ -176,6 +176,10 @@ header {
       flex-direction: row-reverse;
     }
   }
+  a{
+    width: 100%;
+    overflow: hidden;
+  }
   display: flex;
   grid-column: span 4;
   height: 30vh;
@@ -198,6 +202,9 @@ header {
       color: $grey-text;
       font-weight: 700;
       font-size: 1.2rem;
+      &:hover{
+        text-decoration: underline;
+      }
     }
     p {
       margin: 10px;
