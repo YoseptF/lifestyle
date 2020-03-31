@@ -436,6 +436,10 @@ footer {
 }
 
 @media only screen and (max-width: 1179px) {
+  footer .copyright {
+    display: flex;
+    flex-direction: column;
+  }
   .article-wrapper {
     @for $i from 0 through 20 {
       &:nth-child(n + #{3+($i*4)}):nth-child(-n + #{4+($i*4)}) {
@@ -452,7 +456,7 @@ footer {
   header {
     position: sticky;
     top: 0;
-    z-index: 120;
+    z-index: 121;
     nav {
       display: none;
     }
@@ -490,6 +494,9 @@ footer {
 }
 
 @media only screen and (max-width: 890px) {
+  footer .copyright {
+    display: none;
+  }
   .article-wrapper {
     @for $i from 0 through 20 {
       &:nth-child(n + #{2+($i*2)}):nth-child(-n + #{2+($i*2)}) {
