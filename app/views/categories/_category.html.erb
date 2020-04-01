@@ -1,0 +1,8 @@
+<div class="category">
+  <%= link_to category_path(category) do %>
+    <h1><%= category.name %></h1>
+    <h2><%= first_title(category) %></h2>
+    <div class="shadow"></div>
+    <%= image_tag first_image(category), loading: 'lazy' %>
+  <% end %>
+</div>

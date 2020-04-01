@@ -1,0 +1,7 @@
+<div class="login">
+  <%= form_with url: sessions_path, scope:'session', local: true do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit 'Log in' %>
+  <% end %>
+</div>

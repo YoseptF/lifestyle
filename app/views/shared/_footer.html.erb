@@ -1,0 +1,31 @@
+<footer>
+  <%= link_to root_path do %>
+    <h1 class="logo">
+      liFEsTlye &nbsp<i class="fas fa-circle fa-sm"></i>
+    </h1>
+  <% end %>
+  <div class="copyright">
+    <span>Privacy Policy | Terms & Conditions</span>&nbsp&nbsp<span>Copyright 2020. All rights reserved</span>
+  </div>
+  <div class="social">
+    <span>Connect with us: </span>
+    <%= link_to "http://www.twitter.com", target: '_blank' do %>
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    <% end %>
+    <%= link_to "http://www.instagram.com", target: '_blank' do %>
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+      </span>
+    <% end %>
+    <%= link_to "http://www.facebook.com", target: '_blank' do %>
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+      </span>
+    <% end %>
+  </div>
+</footer>

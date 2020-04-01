@@ -1,0 +1,21 @@
+<div class="article-wrapper">
+  <div class="info">
+    <h1><%= category.name %></h1>
+    <%= link_to article_path(article) do %>
+      <h2><%= article.title %></h2>
+    <% end %>
+    <p><%= deck_for article %></p>
+    <h3>Author: <%= article.author.name %></h3>
+    <div class="votes">
+      <% if logged_in? %>
+        <%= upvote(article) %>
+      <% end %>
+      <i class="fas fa-circle"><span><%= article.votes.count %></span></i>
+    </div>
+  </div>
+  <%= link_to article_path(article) do %>
+    <div class="image-wrapper">
+      <%= image_tag url_for(article.image) %>
+    </div>
+  <% end %>
+</div>

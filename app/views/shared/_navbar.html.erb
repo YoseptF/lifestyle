@@ -1,0 +1,28 @@
+<header>
+  <%= link_to root_path do %>
+    <h1 class="logo">
+      liFEsTlye &nbsp<i class="fas fa-circle fa-sm"></i>
+    </h1>
+  <% end %>
+  <nav>
+    <ul>
+      <% categories.each do |categorie| %>
+        <li><%= link_to categorie.name, category_path(categorie) %></li>
+      <% end %>
+    </ul>
+  </nav>
+  <div class="access">
+    <% if logged_in? %>
+      <span>Hello!, <%= current_user.name %></span>
+      <%= link_to  "PUBLISH", new_article_path %> |
+      <%= link_to  "LOG OUT", session_path(current_user), method: :delete %>
+    <% else %>
+      <%= link_to 'LOGIN', new_session_path %> | <%= link_to  "REGISTER", new_user_path %> <i class="fas fa-search"></i>
+    <% end %>
+  </div>
+  <div class="burguer">
+    <a href="javascript:void(0)">
+      <i class="fas fa-bars"></i>
+    </a>
+  </div>
+</header>

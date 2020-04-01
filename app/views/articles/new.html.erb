@@ -1,0 +1,15 @@
+
+<div class="article">
+<%= render  "shared/show_errors", model: @article %>
+  <%= form_with model: @article, local: true do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+    <%= label_tag :categories %>
+    <%= select_tag :categories, options_for_select(@categories) %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <%= f.submit 'Publish article' %>
+  <% end %>
+</div>
