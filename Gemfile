@@ -46,9 +46,9 @@ group :development, :test do
   gem 'capybara'
   gem 'dotenv-rails'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
   gem 'sqlite3', '~> 1.4'
   gem 'webdrivers'
-  gem 'rspec-rails'
 end
 
 group :development do

@@ -21,7 +21,7 @@ RSpec.describe Category, type: :model do
   end
   it 'saves the user with an appropiate name' do
     category1.name = 'Games'
-    category1.priority = 1 
+    category1.priority = 1
     category1.save
     expect(Category.last.name).to eq('Games')
   end
