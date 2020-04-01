@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
     @categories = Category.all.map { |category| [category.name, category.id] }
 
     if @article.save
+      @article.categories << Category.find_by(id: params[:categories])
       redirect_to article_path(@article)
     else
       render 'new'
