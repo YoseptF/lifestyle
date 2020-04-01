@@ -28,7 +28,7 @@ RSpec.describe Article, type: :model do
   it 'can add a category' do
     valid_article
     article1.save
-    article1.categories << Category.find_or_create_by(name: 'Games')
+    article1.categories << Category.find_or_create_by(name: 'Games', priority: 1)
     expect(Article.last.categories).to include(Category.find_by(name: 'Games'))
   end
 end

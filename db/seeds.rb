@@ -13,7 +13,7 @@ User.create(
   name: 'Joseph'
 )
 
-GAMESPOT_API = ENV['GAMESPOT_API'] || process.env.GAMESPOT_API
+GAMESPOT_API = ENV['GAMESPOT_API']
 
 xml_res = RestClient.get "http://www.gamespot.com/api/articles/?api_key=#{GAMESPOT_API}&sort=publish_date:desc&limit=120&feld_list=authors,title,body,image,categories"
 data_hash = Hash.from_xml(xml_res.body)
@@ -37,15 +37,17 @@ articles.length.times do |time|
     )
   end
 
-  art = Article.create(title: article["title"], author_id: User.find_by(name: article["authors"]).id, text: article["body"])
+  art = Article.new(title: article["title"], author_id: User.find_by(name: article["authors"]).id, text: article["body"])
 
   url = articles[time]["image"]["original"].gsub(' ', '%20').gsub('(', '%28').gsub(')', '%29').gsub(',', '%2C').gsub('×','%C3%97').gsub('[', '%5B').gsub(']', '%5D')
 
-  art.image.attach(io: open(url),filename: "#{articles[time]["title"].parameterize}.jpg")
+  art.image.attach(io: URI(url).open,filename: "#{articles[time]["title"].parameterize}.jpg")
 
   article["categories"]["category"].each do |category|
     art.categories << Category.find_by(name: category["name"])
   end
+
+  art.save
 end
 
 
@@ -62,26 +64,3 @@ end
     article_id: Random.rand(Article.first.id..Article.last.id)
   )
 end
-
-
-# cate = articles[0]["categories"]["category"].map {|cat| cat["name"]["name"]}
-# art = User.find_by(name: articles[0]["authors"]).articles.build(
-#     title: articles[0]["title"],
-#     text: articles[0]["body"],
-#     categories: Category.find_by(name: cate)
-#   )
-
-# articles.length.times do |time|
-#   art = User.find_by(name: articles[time]["authors"]).articles.build(
-#     title: articles[time]["title"],
-#     text: articles[time]["body"],
-#     categories: Category.find_by(name: articles[time]["categories"]["category"].select {|cat| cat["name"]})
-#   )
-
-#   art.save
-
-#   art.image.attach(
-#     io: open(articles[time]["image"]["original"]),
-#     filename: "#{articles[time]["title"].parameterize}.jpg"
-#   )
-# end

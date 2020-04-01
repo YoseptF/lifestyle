@@ -5,6 +5,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_by(id: params[:id])
+    @category = Category.includes(articles: :image_attachment).find(params[:id])
   end
 end

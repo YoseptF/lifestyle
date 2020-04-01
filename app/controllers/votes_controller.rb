@@ -12,15 +12,13 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    p params
     @vote = Vote.find_by(user_id: current_user.id, article_id: params[:article_id])
 
     if @vote.delete
       flash[:success] = 'downvoted!'
-      redirect_back_or root_path
     else
       flash[:danger] = 'something went wrong'
-      redirect_back_or root_path
     end
+    redirect_back_or root_path
   end
 end

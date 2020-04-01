@@ -44,55 +44,53 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-# The settings below are suggested to provide a good initial experience
-# with RSpec, but feel free to customize to your heart's content.
-=begin
-  # This allows you to limit a spec run to individual examples or groups
-  # you care about by tagging them with `:focus` metadata. When nothing
-  # is tagged with `:focus`, all examples get run. RSpec also provides
-  # aliases for `it`, `describe`, and `context` that include `:focus`
-  # metadata: `fit`, `fdescribe` and `fcontext`, respectively.
-  config.filter_run_when_matching :focus
-
-  # Allows RSpec to persist some state between runs in order to support
-  # the `--only-failures` and `--next-failure` CLI options. We recommend
-  # you configure your source control system to ignore this file.
-  config.example_status_persistence_file_path = "spec/examples.txt"
-
-  # Limits the available syntax to the non-monkey patched syntax that is
-  # recommended. For more details, see:
-  #   - http://rspec.info/blog/2012/06/rspecs-new-expectation-syntax/
-  #   - http://www.teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
-  #   - http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/#zero-monkey-patching-mode
-  config.disable_monkey_patching!
-
-  # Many RSpec users commonly either run the entire suite or an individual
-  # file, and it's useful to allow more verbose output when running an
-  # individual spec file.
-  if config.files_to_run.one?
-    # Use the documentation formatter for detailed output,
-    # unless a formatter has already been configured
-    # (e.g. via a command-line flag).
-    config.default_formatter = "doc"
-  end
-
-  # Print the 10 slowest examples and example groups at the
-  # end of the spec run, to help surface which specs are running
-  # particularly slow.
-  config.profile_examples = 10
-
-  # Run specs in random order to surface order dependencies. If you find an
-  # order dependency and want to debug it, you can fix the order by providing
-  # the seed, which is printed after each run.
-  #     --seed 1234
-  config.order = :random
-
-  # Seed global randomization in this process using the `--seed` CLI option.
-  # Setting this allows you to use `--seed` to deterministically reproduce
-  # test failures related to randomization by passing the same `--seed` value
-  # as the one that triggered the failure.
-  Kernel.srand config.seed
-=end
+  # The settings below are suggested to provide a good initial experience
+  # with RSpec, but feel free to customize to your heart's content.
+  #   # This allows you to limit a spec run to individual examples or groups
+  #   # you care about by tagging them with `:focus` metadata. When nothing
+  #   # is tagged with `:focus`, all examples get run. RSpec also provides
+  #   # aliases for `it`, `describe`, and `context` that include `:focus`
+  #   # metadata: `fit`, `fdescribe` and `fcontext`, respectively.
+  #   config.filter_run_when_matching :focus
+  #
+  #   # Allows RSpec to persist some state between runs in order to support
+  #   # the `--only-failures` and `--next-failure` CLI options. We recommend
+  #   # you configure your source control system to ignore this file.
+  #   config.example_status_persistence_file_path = "spec/examples.txt"
+  #
+  #   # Limits the available syntax to the non-monkey patched syntax that is
+  #   # recommended. For more details, see:
+  #   #   - http://rspec.info/blog/2012/06/rspecs-new-expectation-syntax/
+  #   #   - http://www.teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
+  #   #   - http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/#zero-monkey-patching-mode
+  #   config.disable_monkey_patching!
+  #
+  #   # Many RSpec users commonly either run the entire suite or an individual
+  #   # file, and it's useful to allow more verbose output when running an
+  #   # individual spec file.
+  #   if config.files_to_run.one?
+  #     # Use the documentation formatter for detailed output,
+  #     # unless a formatter has already been configured
+  #     # (e.g. via a command-line flag).
+  #     config.default_formatter = "doc"
+  #   end
+  #
+  #   # Print the 10 slowest examples and example groups at the
+  #   # end of the spec run, to help surface which specs are running
+  #   # particularly slow.
+  #   config.profile_examples = 10
+  #
+  #   # Run specs in random order to surface order dependencies. If you find an
+  #   # order dependency and want to debug it, you can fix the order by providing
+  #   # the seed, which is printed after each run.
+  #   #     --seed 1234
+  #   config.order = :random
+  #
+  #   # Seed global randomization in this process using the `--seed` CLI option.
+  #   # Setting this allows you to use `--seed` to deterministically reproduce
+  #   # test failures related to randomization by passing the same `--seed` value
+  #   # as the one that triggered the failure.
+  #   Kernel.srand config.seed
 end
 
 def title_validations
@@ -121,7 +119,7 @@ def text_validations
   it 'not too long' do
     article1.text = '1' * 200_000
     article1.save
-    expect(article1.errors.full_messages).to include('Text is too long (maximum is 25000 characters)')
+    expect(article1.errors.full_messages).to include('Text is too long (maximum is 35000 characters)')
   end
   it 'that exists' do
     article1.save
@@ -134,5 +132,65 @@ def valid_article
   article1.title = 'The title'
   article1.text = '*' * 10_000
   article1.author_id = User.first.id
-  article1.image.attach(io: open('https://source.unsplash.com/random'), filename: 'file.jpg')
+  article1.image.attach(io: URI('https://source.unsplash.com/random').open, filename: 'file.jpg')
+end
+
+def create_base_page
+  @user = User.create(name: 'Joseph')
+  @category = Category.create(name: 'Games', priority: 5)
+  @article = Article.new(title: 'the title', text: 't' * 10_000, author_id: @user.id)
+  @article.image.attach(io: URI('https://source.unsplash.com/random').open, filename: 'file.jpg')
+  @article.categories << @category
+
+  @article.save
+
+  @vote = Vote.create(user_id: @user.id, article_id: @article.id)
+  visit root_path
+end
+
+def log_in_process
+  click_link 'LOGIN'
+  fill_in 'session_name', with: User.first.name
+  click_button 'Log in'
+end
+
+def check_for_empty_fields
+  it 'title is empty' do
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: "Title can't be blank"
+  end
+  it 'text is empty' do
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: "Text can't be blank"
+  end
+  it 'image is empty' do
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: "Image can't be blank"
+  end
+end
+
+def check_for_short_fields
+  it 'title is too short' do
+    fill_in 'article_title', with: '1'
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: 'Title is too short (minimum is 3 characters)'
+  end
+  it 'text is too short' do
+    fill_in 'article_text', with: '1'
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: 'Text is too short (minimum is 15 characters)'
+  end
+end
+
+def check_for_long_fields
+  it 'title is too long' do
+    fill_in 'article_title', with: '1' * 500
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: 'Title is too long (maximum is 150 characters)'
+  end
+  it 'text is too long' do
+    fill_in 'article_text', with: '1' * 50_000
+    click_button 'commit'
+    expect(page).to have_selector 'li', text: 'Text is too long (maximum is 35000 characters)'
+  end
 end

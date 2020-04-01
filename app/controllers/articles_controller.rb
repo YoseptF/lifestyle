@@ -14,11 +14,8 @@ class ArticlesController < ApplicationController
     @categories = Category.all.map { |category| [category.name, category.id] }
 
     if @article.save
-      p 'done'
       redirect_to article_path(@article)
     else
-      p @article.errors.full_messages
-      p 'not done'
       render 'new'
     end
   end

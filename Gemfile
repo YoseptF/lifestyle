@@ -6,6 +6,7 @@ ruby '2.7.0'
 gem 'faker'
 gem 'hirb'
 gem 'lograge'
+
 gem 'rest-client'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
@@ -45,9 +46,9 @@ group :development, :test do
   gem 'capybara'
   gem 'dotenv-rails'
   gem 'rails-controller-testing'
-  gem 'rspec-rails'
   gem 'sqlite3', '~> 1.4'
   gem 'webdrivers'
+  gem 'rspec-rails'
 end
 
 group :development do

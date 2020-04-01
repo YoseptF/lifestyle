@@ -1,7 +1,6 @@
 <div class="featured">
   <%= link_to article_path(@featured) do %>
     <div class="info">
-      <% p @featured %>
       <h1><%= @featured.title %></h1>
       <h2><%= deck_for(@featured) %></h2>
     </div>

@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   validates :title, presence: true, length: { in: 3..150 }
-  validates :text, presence: true, length: { in: 15..25_000 }
+  validates :text, presence: true, length: { in: 15..35_000 }
   validates_presence_of :image
 
   has_and_belongs_to_many :categories
