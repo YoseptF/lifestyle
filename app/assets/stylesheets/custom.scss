@@ -44,6 +44,7 @@ a {
 
 .container {
   display: grid;
+  height: fit-content;
   grid-template-columns: repeat(12, 1fr);
 }
 
