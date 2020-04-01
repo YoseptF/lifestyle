@@ -37,4 +37,12 @@ module SessionsHelper
   def store_category(category)
     session[:forwarding_category] = category.id
   end
+
+  def only_logged_in
+    redirect_to root_path unless current_user
+  end
+
+  def only_not_logged_in
+    redirect_to root_path if current_user
+  end
 end

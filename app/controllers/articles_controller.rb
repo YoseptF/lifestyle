@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :only_logged_in, only: %i[new]
   def new
     @article = Article.new
     @categories = Category.all.map { |category| [category.name, category.id] }
